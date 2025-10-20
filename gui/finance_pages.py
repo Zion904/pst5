@@ -38,3 +38,37 @@ def show_finance_page(manager):
             st.dataframe(df)
         else:
             st.info("This student has no payment history.")
+    
+    st.divider()
+    st.subheader("Payments Summary (All Students)")
+
+
+    only_with_payments = st.checkbox("Only show students with at least one payment", value=True)
+
+    rows = []
+    for s in manager.students:
+        sid = getattr(s, "user_id", getattr(s, "id", None))
+        if sid is None:
+            continue
+
+        history = manager.get_payment_history(sid) or []
+        count = len(history)
+        total = sum((h.get("amount") or 0) for h in history)
+        last_ts = max([h.get("timestamp", "") for h in history], default="")
+
+        if (not only_with_payments) or count > 0:
+            rows.append({
+                "student_id": sid,
+                "name": getattr(s, "name", ""),
+                "payments": count,
+                "total_amount": round(total, 2),
+                "last_payment": last_ts,
+            })
+
+    if rows:
+        df = pd.DataFrame(rows).sort_values(
+            ["payments", "total_amount"], ascending=[False, False], ignore_index=True
+        )
+        st.dataframe(df, use_container_width=True)
+
+        

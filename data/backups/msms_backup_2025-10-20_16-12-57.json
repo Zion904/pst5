@@ -203,21 +203,15 @@
     "finance_log": [
         {
             "student_id": 1,
-            "amount": 10000.0,
-            "method": "",
-            "timestamp": "2025-10-20T16:16:04.096525"
+            "amount": 100000.0,
+            "method": "cash",
+            "timestamp": "2025-10-17T16:17:51.230575"
         },
         {
-            "student_id": 1,
-            "amount": 10000.0,
-            "method": "Cash",
-            "timestamp": "2025-10-20T16:16:06.848485"
-        },
-        {
-            "student_id": 1,
-            "amount": 10000.0,
-            "method": "Cash",
-            "timestamp": "2025-10-20T16:16:09.564277"
+            "student_id": 6,
+            "amount": 0.051000000000000004,
+            "method": "credit card",
+            "timestamp": "2025-10-17T16:19:49.232209"
         }
     ]
 }
